@@ -14,7 +14,7 @@ ff:	$(FF_SRC)main.cpp
 
 omp: 
 
-run: 
+run: ff
 	./$(BIN)ff
 
 clean: 

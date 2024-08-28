@@ -7,3 +7,7 @@ matrix M di N*N double.
 n-k diagional element = e^k_(m,m+k) dove m \in [0,n-k] è il risultato del dotproduct tra v^k_m e v^k_(m+k) di size k composto dagli elemtni della stessa row m e della stessa colonna m + k. 
 
 quindi   e^k_(i,j) = \sqrt^3 (dotprod(v^k_m,v^k_(m+k)))
+
+
+
+ 
