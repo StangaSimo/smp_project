@@ -2,6 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cmath>
+#include <cstdint>
 
 using namespace ff;
 
@@ -81,6 +82,7 @@ struct Worker: ff_node_t<int> {
     int id = ff_gettid();
     int* svc(int* n) {
         std::cout << id << ": mi è arrivato :" << *n << "\n";
+        exit(0);
         return GO_ON;
     }
 };
@@ -103,12 +105,8 @@ int main(int argc, char *argv[])
     std::printf("Time %f (ms)\n",ffTime(GET_TIME));
 
     /***** ff *****/
-
     int N_data = 10;
     std::vector<int> data(N_data, 1);
-    for (int i=0; i<N_data; ++i) {
-        std::cout << data[i] << "\n";
-    }
 
     int N_workers = 4; /* size of M (NxN) */
 
