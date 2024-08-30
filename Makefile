@@ -1,21 +1,20 @@
-CXX                = /home/simo/openbin/bin/mpicxx
+CXX                = /home/simo/j/mpi_bin/bin/mpicxx
 GCC                = g++
 STD                = -std=c++20
 OPTFLAGS	       = -O3
 CXXFLAGS          += -Wall 
 INCS              += -I ~/fastflow
 FF_SRC             = src_ff/
+OMP_SRC             = src_omp/
 BIN                = bin/
 
 .PHONY: all clean cleanall 
 
 ff:	$(FF_SRC)main.cpp
-	$(GCC) $(INCS) $(STD) $(CXXFLAGS) $(OPTFLAGS) -o $(BIN)$@ $< 
+	$(GCC) $(INCS) $(STD) $(CXXFLAGS) $(OPTFLAGS) -o $@ $< 
 
-omp: 
-
-run: ff
-	./$(BIN)ff
+omp: $(OMP_SRC)main.cpp
+	$(CXX) $(STD) $(CXXFLAGS) $(OPTFLAGS) -o $@ $< 
 
 clean: 
 	-rm -fr bin/*
