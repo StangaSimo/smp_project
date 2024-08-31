@@ -3,13 +3,13 @@
 #include <cmath>
 #include <cstdint>
 #include <ff/ff.hpp>
-
 using namespace ff;
+
+#define SEQ /* comment for stopping the sequential test */
 
 struct Task_t {
     uint64_t i;
     uint64_t j;
-    double res;
 };
 
 std::vector<double> *Mt;
@@ -80,8 +80,12 @@ struct SourceSink: ff_monode_t<Task_t,int> {  /* in, out */
         curr_diagonal = N-1;
         i_c = 1;
         j_c = 0;
-        N_jobs_done = 0; /* for the first loop */
+
+        /* for the first loop */
+        N_jobs_done = 0; 
         N_jobs_given = N_workers; 
+
+        /* for the last thread that compute the last element */
         stop = false;
         return 0;
     }
@@ -91,7 +95,7 @@ struct SourceSink: ff_monode_t<Task_t,int> {  /* in, out */
     }
 
     int* svc(Task_t* n) { /* out, in */
-        if (n == nullptr) { /* init */
+        if (n == nullptr) { /* initial case */
             for (int i=0; i<N_workers; i++){
                 task_maker(&task,i);
                 ff_send_out_to(&(task)[i],i);
@@ -109,14 +113,19 @@ struct SourceSink: ff_monode_t<Task_t,int> {  /* in, out */
             N_jobs_done = 0;
             N_jobs_given = 0;
             curr_diagonal--;
-            if ((int)curr_diagonal < N_workers) { /* diagonal with less element than workers */
-                if (curr_diagonal == 1) { /* final case */
+
+            /* diagonal with less element than workers */
+            if ((int)curr_diagonal < N_workers) { 
+
+                /* final case */
+                if (curr_diagonal == 1) { 
                     task_maker(&task,0);
                     ff_send_out_to(&(task)[0],0);
                     stop = true;
-                    broadcast_task(EOS); /* compute complete */
+                    broadcast_task(EOS); 
                     return GO_ON;
                 }
+                /* send out the right number of tasks */
                 for (int i=0; i<(int)curr_diagonal; i++) { 
                     task_maker(&task,i);
                     ff_send_out_to(&(task)[i],i);
@@ -129,13 +138,14 @@ struct SourceSink: ff_monode_t<Task_t,int> {  /* in, out */
                     N_jobs_given++;
                 } 
             }
-        } else { /*ready worker will go on with the current diagonal */
-            if (N_jobs_given < curr_diagonal) { /* wait if the diagonal isn't complete but the jobs has been sent */
+        /* ready worker will go on with the current diagonal */
+        } else { 
+            /* wait if the diagonal isn't complete but the jobs has been sent */
+            if (N_jobs_given < curr_diagonal) { 
                 N_jobs_given++;
                 task_maker(&task,(int)wid);
                 ff_send_out_to(&(task)[wid],wid);
-            } else {
-            }
+            } 
         }
         return GO_ON;
     }
@@ -147,7 +157,6 @@ struct SourceSink: ff_monode_t<Task_t,int> {  /* in, out */
         }
         (*task)[i].i = i_c;
         (*task)[i].j = j_c;
-        (*task)[i].res = 0;
         j_c++;
     }
 };
@@ -178,18 +187,17 @@ int main(int argc, char *argv[])
 
     std::cout << "Compute a matrix " << N << " * " << N << " with " << N_workers << " threads\n" ; 
 
-    //N = 1024; /* size of M (NxN) */
     std::vector<double> M(N * N, 0);
-    //std::vector<double> M_test(N * N, 0); 
-
     init_M(&M);
-    //init_M(&M_test);
 
-
-    //ffTime(START_TIME);
-    //compute_seq(&M_test);
-    //ffTime(STOP_TIME);
+#ifdef SEQ
+    std::vector<double> M_test(N * N, 0); 
+    init_M(&M_test);
+    ffTime(START_TIME);
+    compute_seq(&M_test);
+    ffTime(STOP_TIME);
     std::printf("\nCompute Seq Time %f (ms)\n",ffTime(GET_TIME));
+#endif
 
     /******************** ff ********************/
 
@@ -217,10 +225,12 @@ int main(int argc, char *argv[])
     ffTime(STOP_TIME);
     std::printf("\nCompute Parallel Time %f (ms)\n",ffTime(GET_TIME));
 
-    //if (compare_M(Mt,&M_test)) 
-    //    std::cout << "\nTest Passed " << "\n";
-    //else
-    //    std::cout << "\nTest Failed " << "\n";
+#ifdef SEQ
+    if (compare_M(Mt,&M_test)) 
+        std::cout << "\nTest Passed " << "\n";
+    else
+        std::cout << "\nTest Failed " << "\n";
+#endif
 
     return EXIT_SUCCESS;
 }
