@@ -5,7 +5,8 @@
 #include <ff/ff.hpp>
 using namespace ff;
 
-#define SEQ /* comment for stopping the sequential test */
+//#define SEQ /* comment for stopping the sequential test */
+//#define ONDEMAND 
 
 struct Task_t {
     uint64_t i;
@@ -66,7 +67,7 @@ bool compare_M (std::vector<double> *A,std::vector<double> *B) {
     return c;
 }
 
-struct SourceSink: ff_monode_t<Task_t,int> {  /* in, out */
+struct SourceSink: ff_monode_t<int,int> {  /* in, out */
     std::vector<Task_t> task;
     int N_workers;
     bool stop;
@@ -94,7 +95,7 @@ struct SourceSink: ff_monode_t<Task_t,int> {  /* in, out */
         this->N_workers = N_workers;
     }
 
-    int* svc(Task_t* n) { /* out, in */
+    int* svc(int* n) { /* out, in */
         if (n == nullptr) { /* initial case */
             for (int i=0; i<N_workers; i++){
                 task_maker(&task,i);
@@ -162,9 +163,10 @@ struct SourceSink: ff_monode_t<Task_t,int> {  /* in, out */
 };
 
 struct Worker: ff_node_t<Task_t, int> { /* in, out */
+    int u = 1;
     int* svc(Task_t* task) {  /* out, in */
         task_compute(task);
-        ff_send_out(task);
+        ff_send_out(&u);
         return GO_ON;
     }
 
@@ -178,14 +180,10 @@ struct Worker: ff_node_t<Task_t, int> { /* in, out */
 
 int main(int argc, char *argv[])
 {
-    std::cout << "*******************************\n";
-    std::cout << "*           hello             *\n";
-    std::cout << "*******************************\n";
-
     N =std::stol(argv[1]);
     int N_workers =std::stol(argv[2]);
 
-    std::cout << "Compute a matrix " << N << " * " << N << " with " << N_workers << " threads\n" ; 
+    std::cout << "\nCompute a matrix " << N << " * " << N << " with " << N_workers << " threads\n" ; 
 
     std::vector<double> M(N * N, 0);
     init_M(&M);
@@ -215,7 +213,10 @@ int main(int argc, char *argv[])
 
     farm.remove_collector(); 
     farm.wrap_around(); 
+
+#ifdef ONDEMAND
     farm.set_scheduling_ondemand(); 
+#endif
 
     ffTime(START_TIME);
     if (farm.run_and_wait_end() < 0){
@@ -223,7 +224,7 @@ int main(int argc, char *argv[])
         return -1;
     }
     ffTime(STOP_TIME);
-    std::printf("\nCompute Parallel Time %f (ms)\n",ffTime(GET_TIME));
+    std::printf("Compute Parallel Time %f (ms)\n",ffTime(GET_TIME));
 
 #ifdef SEQ
     if (compare_M(Mt,&M_test)) 
