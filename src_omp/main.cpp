@@ -65,20 +65,15 @@ int main (int argc, char *argv[]){
 				std::printf("HO MANDATO TASK a %ld\n",victim);
 
 				MPI_Irecv(&result[j], 1, MPI_DOUBLE, victim, 0, MPI_COMM_WORLD, &(requests_receive[j]));
-				//MPI_Wait(&requests_receive[j], MPI_STATUS_IGNORE);
-				//std::printf("RISULTATO ARRIVATO\n");
 
 				victim++;
+
 				if (victim == (n_Nodes)) {
 					for (uint64_t w=0; w<(n_Nodes-1); w++)
 						MPI_Wait(&(requests_send[w]), MPI_STATUS_IGNORE);
 					std::printf("HO ASPETTATO TUTTI GLI WORKERS\n");
 					victim = 1;
 				}
-
-				
-				
-				
 			} /* diagonal completed */
 
 			/* if the worker aren't even with number of element in the diagonal */
@@ -94,7 +89,7 @@ int main (int argc, char *argv[]){
 
 	 		std::printf("ASPETTATO i risultati \n");
         	for (uint64_t j=0; j<N-i; ++j){ /* wait for all the diagonal result */
-	 			std::printf("ASPETTO LA NUMERO  \n");
+	 			std::printf("ASPETTO LA NUMERO %d \n", j);
 				MPI_Wait(&(requests_receive[j]), MPI_STATUS_IGNORE);
 			} 
 
@@ -103,13 +98,19 @@ int main (int argc, char *argv[]){
         	//for (uint64_t j=0; j<N-i; ++j) /* buffer creation for the broadcast */ 
 			//	result[j] = M[j*N+j+i];
 
-	  		MPI_Bcast(&result, N-i, MPI_DOUBLE, myId, MPI_COMM_WORLD);
+			MPI_Request requests_broadcast;
+			MPI_Ibcast(&result, N-i, MPI_DOUBLE, myId, MPI_COMM_WORLD, &requests_broadcast);
+			MPI_Wait(&requests_broadcast, MPI_STATUS_IGNORE);
+	 		std::printf("BROADCAST ARRIVATO \n");
 		}
+
+	 	std::printf("EMITTER ESCE \n");
 
 	} else { /* worker Node */
 
 		int ready_receive;
 		int ready_broadcast;
+		bool c = true;
 		double res = 99;
 		uint64_t n_broadcast = 0;
 		uint64_t tasks[2] = {0,0};
@@ -120,32 +121,33 @@ int main (int argc, char *argv[]){
 
 			MPI_Request requests_receive;
 			MPI_Request requests_broadcast;
-			MPI_Irecv(&tasks, 2, MPI_UINT64_T, 0, 0, MPI_COMM_WORLD, &requests_receive);
-			MPI_Ibcast(&result, N-n_broadcast-1, MPI_DOUBLE, 0, MPI_COMM_WORLD, &requests_broadcast);
+			if (c)
+				MPI_Irecv(&tasks, 2, MPI_UINT64_T, 0, 0, MPI_COMM_WORLD, &requests_receive);
+			MPI_Ibcast(&result, N-n_broadcast, MPI_DOUBLE, 0, MPI_COMM_WORLD, &requests_broadcast);
 
-			while (false) {
+			while (true) {
 				MPI_Test(&requests_receive, &ready_receive, MPI_STATUS_IGNORE);
 				if (ready_receive) { /* task arrivata */
 					MPI_Request requests_result;
 					std::printf("mi è arrivata una task %ld %ld\n", tasks[0], tasks[1]);
 					MPI_Isend(&res, 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, &requests_result);
 					MPI_Wait(&requests_result, MPI_STATUS_IGNORE);
-					std::printf("ho mandato il risultato\n");
 
 					/* compute task */	
+					c = false;
 					MPI_Irecv(&tasks, 2, MPI_UINT64_T, 0, 0, MPI_COMM_WORLD, &requests_receive); /* next tasks */
 				}				
 
 				MPI_Test(&requests_broadcast, &ready_broadcast, MPI_STATUS_IGNORE);
 				if (ready_broadcast) { 
-					std::printf("E' arrivato il BROADCAST\n");
-					return 0;
-					/* scrive risultati M[j*N+j+i]*/
+					/* scrive risultati M[j*N+j+i] */
 					n_broadcast++;
+					std::printf("\n\nE' arrivato il BROADCAST NUMERO %d\n\n",n_broadcast);
 					break;
 				}
 			}
 		}
+		std::printf("\n\nSONO USCITO\n\n");
 	}
 	
 	MPI_Finalize();
