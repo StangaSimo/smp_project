@@ -135,7 +135,10 @@ int main (int argc, char *argv[]){
 			MPI_Request requests_broadcast;
 			MPI_Ibcast(&result[0], N-i, MPI_DOUBLE, myId, MPI_COMM_WORLD, &requests_broadcast);
 			MPI_Wait(&requests_broadcast, MPI_STATUS_IGNORE);
-			sleep(1);
+			MPI_Barrier(MPI_COMM_WORLD);
+
+			/*TODO: maybe barrirer??*/
+
 			result.clear();
 			result.resize(N-i-1);
 	 		//std::printf("BROADCAST ARRIVATO \n");
@@ -183,35 +186,35 @@ int main (int argc, char *argv[]){
 						if (myId == 1)	
 							std::printf("\n\n%d e j = %ld e scrive %f \n",myId,j,result[j]);
 					}
+
+					MPI_Barrier(MPI_COMM_WORLD); /* mitigate the broadcast bug */
 					result.clear();
 					result.resize(N-n_broadcast-1);
 
 					
 					//std::printf("%d E' arrivato il broadcast %ld\n",myId, n_broadcast);
 					break;
-				} else {
+				}
 
-					MPI_Test(&requests_receive, &ready_receive, MPI_STATUS_IGNORE);
-					if (ready_receive) { /* task arrived */
-						MPI_Request requests_result;
-						uint64_t i = task[0];
-						uint64_t j = task[1];
+				MPI_Test(&requests_receive, &ready_receive, MPI_STATUS_IGNORE);
+				if (ready_receive) { /* task arrived */
+					MPI_Request requests_result;
+					uint64_t i = task[0];
+					uint64_t j = task[1];
 
-    	    			for (uint64_t w=0; w<i; ++w)
-    	    			    res += M[j*N+j+i-w-1] * M[(j+1+w)*N+j+i]; 
-    	    			res = std::cbrt(res);
-						if (myId == 1)	
-							print_M(&M,N);
-						std::printf("%d mi è arrivata una task %ld %ld e il risultato %f\n",myId, task[0], task[1],res);
-						MPI_Isend(&res, 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, &requests_result);
-						MPI_Wait(&requests_result, MPI_STATUS_IGNORE);
-						res = 0;
-						//std::printf("%d ho mandato risultato \n",myId);
-						/* next possible task */
-						MPI_Irecv(task, 2, MPI_UINT64_T, 0, 0, MPI_COMM_WORLD, &requests_receive);
-						c = false; 
-				}				
-
+        			for (uint64_t w=0; w<i; ++w)
+        			    res += M[j*N+j+i-w-1] * M[(j+1+w)*N+j+i]; 
+        			res = std::cbrt(res);
+					if (myId == 1)	
+						print_M(&M,N);
+					std::printf("%d mi è arrivata una task %ld %ld e il risultato %f\n",myId, task[0], task[1],res);
+					MPI_Isend(&res, 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, &requests_result);
+					MPI_Wait(&requests_result, MPI_STATUS_IGNORE);
+					res = 0;
+					//std::printf("%d ho mandato risultato \n",myId);
+					/* next possible task */
+					MPI_Irecv(task, 2, MPI_UINT64_T, 0, 0, MPI_COMM_WORLD, &requests_receive);
+					c = false; 
 				}
 
 				
