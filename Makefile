@@ -3,6 +3,7 @@ GCC                = g++
 STD                = -std=c++20
 OPTFLAGS	       = -O3
 CXXFLAGS          += -Wall 
+CXXFLAGS          += -fopenmp 
 INCS              += -I ~/fastflow
 FF_SRC             = src_ff/
 OMP_SRC            = src_omp/
