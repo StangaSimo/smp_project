@@ -1,0 +1,10 @@
+Matrix 8 * 8 Time with 6  processes: 0.025950 seconds 
+Matrix 16 * 16 Time with 6  processes: 0.028889 seconds 
+Matrix 32 * 32 Time with 6  processes: 0.034324 seconds 
+Matrix 128 * 128 Time with 6  processes: 0.086093 seconds 
+Matrix 248 * 248 Time with 6  processes: 0.210486 seconds 
+Matrix 1024 * 1024 Time with 6  processes: 2.082649 seconds 
+Matrix 2048 * 2048 Time with 6  processes: 8.094379 seconds 
+Matrix 4096 * 4096 Time with 6  processes: 51.130161 seconds 
+Matrix 6144 * 6144 Time with 6  processes: 148.381283 seconds 
+Matrix 8192 * 8192 Time with 6  processes: 384.995513 seconds 

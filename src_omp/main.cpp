@@ -7,7 +7,7 @@
 #include <cmath>
 #include <omp.h>
 
-#define SEQ 
+//#define SEQ 
 #define PARALLELIZE 
 
 struct Task_t {
@@ -192,7 +192,7 @@ int main (int argc, char *argv[]){
 	double end = MPI_Wtime();
 
 	if(myId == 0)
-    	std::printf("Time with %ld  processes: %f seconds \n", n_Nodes, end-start);
+    	std::printf("Matrix %ld * %ld Time with %ld  processes: %f seconds \n",N, N,n_Nodes, end-start);
 
 #ifdef SEQ
     if (compare_M(&M,&M_test,N)) 

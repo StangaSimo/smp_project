@@ -1,0 +1,297 @@
+
+Compute a matrix 8 * 8 with 2 threads
+Compute Parallel Time 0.478000 (ms)
+
+Compute a matrix 8 * 8 with 4 threads
+Compute Parallel Time 0.745000 (ms)
+
+Compute a matrix 8 * 8 with 6 threads
+Compute Parallel Time 1.416000 (ms)
+
+Compute a matrix 8 * 8 with 8 threads
+Compute Parallel Time 1.763000 (ms)
+
+Compute a matrix 8 * 8 with 10 threads
+Compute Parallel Time 1.323000 (ms)
+
+Compute a matrix 8 * 8 with 12 threads
+Compute Parallel Time 2.770000 (ms)
+
+Compute a matrix 8 * 8 with 14 threads
+Compute Parallel Time 2.305000 (ms)
+
+Compute a matrix 8 * 8 with 16 threads
+Compute Parallel Time 2.979000 (ms)
+
+Compute a matrix 8 * 8 with 20 threads
+Compute Parallel Time 3.380000 (ms)
+
+Compute a matrix 8 * 8 with 24 threads
+Compute Parallel Time 3.057000 (ms)
+
+Compute a matrix 8 * 8 with 28 threads
+Compute Parallel Time 6.994000 (ms)
+
+Compute a matrix 16 * 16 with 2 threads
+Compute Parallel Time 0.477000 (ms)
+
+Compute a matrix 16 * 16 with 4 threads
+Compute Parallel Time 1.315000 (ms)
+
+Compute a matrix 16 * 16 with 6 threads
+Compute Parallel Time 0.830000 (ms)
+
+Compute a matrix 16 * 16 with 8 threads
+Compute Parallel Time 1.644000 (ms)
+
+Compute a matrix 16 * 16 with 10 threads
+Compute Parallel Time 1.471000 (ms)
+
+Compute a matrix 16 * 16 with 12 threads
+Compute Parallel Time 1.611000 (ms)
+
+Compute a matrix 16 * 16 with 14 threads
+Compute Parallel Time 2.276000 (ms)
+
+Compute a matrix 16 * 16 with 16 threads
+Compute Parallel Time 2.374000 (ms)
+
+Compute a matrix 16 * 16 with 20 threads
+Compute Parallel Time 3.047000 (ms)
+
+Compute a matrix 16 * 16 with 24 threads
+Compute Parallel Time 3.684000 (ms)
+
+Compute a matrix 16 * 16 with 28 threads
+Compute Parallel Time 3.841000 (ms)
+
+Compute a matrix 32 * 32 with 2 threads
+Compute Parallel Time 0.730000 (ms)
+
+Compute a matrix 32 * 32 with 4 threads
+Compute Parallel Time 0.837000 (ms)
+
+Compute a matrix 32 * 32 with 6 threads
+Compute Parallel Time 1.012000 (ms)
+
+Compute a matrix 32 * 32 with 8 threads
+Compute Parallel Time 1.689000 (ms)
+
+Compute a matrix 32 * 32 with 10 threads
+Compute Parallel Time 1.230000 (ms)
+
+Compute a matrix 32 * 32 with 12 threads
+Compute Parallel Time 2.157000 (ms)
+
+Compute a matrix 32 * 32 with 14 threads
+Compute Parallel Time 2.222000 (ms)
+
+Compute a matrix 32 * 32 with 16 threads
+Compute Parallel Time 2.559000 (ms)
+
+Compute a matrix 32 * 32 with 20 threads
+Compute Parallel Time 2.626000 (ms)
+
+Compute a matrix 32 * 32 with 24 threads
+Compute Parallel Time 3.231000 (ms)
+
+Compute a matrix 32 * 32 with 28 threads
+Compute Parallel Time 3.978000 (ms)
+
+Compute a matrix 128 * 128 with 2 threads
+Compute Parallel Time 4.515000 (ms)
+
+Compute a matrix 128 * 128 with 4 threads
+Compute Parallel Time 3.432000 (ms)
+
+Compute a matrix 128 * 128 with 6 threads
+Compute Parallel Time 2.547000 (ms)
+
+Compute a matrix 128 * 128 with 8 threads
+Compute Parallel Time 2.608000 (ms)
+
+Compute a matrix 128 * 128 with 10 threads
+Compute Parallel Time 3.272000 (ms)
+
+Compute a matrix 128 * 128 with 12 threads
+Compute Parallel Time 3.500000 (ms)
+
+Compute a matrix 128 * 128 with 14 threads
+Compute Parallel Time 3.185000 (ms)
+
+Compute a matrix 128 * 128 with 16 threads
+Compute Parallel Time 4.776000 (ms)
+
+Compute a matrix 128 * 128 with 20 threads
+Compute Parallel Time 5.581000 (ms)
+
+Compute a matrix 128 * 128 with 24 threads
+Compute Parallel Time 5.731000 (ms)
+
+Compute a matrix 128 * 128 with 28 threads
+Compute Parallel Time 6.218000 (ms)
+
+Compute a matrix 248 * 248 with 2 threads
+Compute Parallel Time 16.506000 (ms)
+
+Compute a matrix 248 * 248 with 4 threads
+Compute Parallel Time 9.439000 (ms)
+
+Compute a matrix 248 * 248 with 6 threads
+Compute Parallel Time 7.142000 (ms)
+
+Compute a matrix 248 * 248 with 8 threads
+Compute Parallel Time 6.854000 (ms)
+
+Compute a matrix 248 * 248 with 10 threads
+Compute Parallel Time 6.587000 (ms)
+
+Compute a matrix 248 * 248 with 12 threads
+Compute Parallel Time 6.685000 (ms)
+
+Compute a matrix 248 * 248 with 14 threads
+Compute Parallel Time 6.767000 (ms)
+
+Compute a matrix 248 * 248 with 16 threads
+Compute Parallel Time 10.647000 (ms)
+
+Compute a matrix 248 * 248 with 20 threads
+Compute Parallel Time 11.263000 (ms)
+
+Compute a matrix 248 * 248 with 24 threads
+Compute Parallel Time 11.707000 (ms)
+
+Compute a matrix 248 * 248 with 28 threads
+Compute Parallel Time 12.237000 (ms)
+
+Compute a matrix 1024 * 1024 with 2 threads
+Compute Parallel Time 498.776000 (ms)
+
+Compute a matrix 1024 * 1024 with 4 threads
+Compute Parallel Time 252.595000 (ms)
+
+Compute a matrix 1024 * 1024 with 6 threads
+Compute Parallel Time 173.010000 (ms)
+
+Compute a matrix 1024 * 1024 with 8 threads
+Compute Parallel Time 142.882000 (ms)
+
+Compute a matrix 1024 * 1024 with 10 threads
+Compute Parallel Time 118.065000 (ms)
+
+Compute a matrix 1024 * 1024 with 12 threads
+Compute Parallel Time 103.514000 (ms)
+
+Compute a matrix 1024 * 1024 with 14 threads
+Compute Parallel Time 95.131000 (ms)
+
+Compute a matrix 1024 * 1024 with 16 threads
+Compute Parallel Time 145.484000 (ms)
+
+Compute a matrix 1024 * 1024 with 20 threads
+Compute Parallel Time 144.870000 (ms)
+
+Compute a matrix 1024 * 1024 with 24 threads
+Compute Parallel Time 144.744000 (ms)
+
+Compute a matrix 1024 * 1024 with 28 threads
+Compute Parallel Time 148.896000 (ms)
+
+Compute a matrix 2048 * 2048 with 2 threads
+Compute Parallel Time 4698.683000 (ms)
+
+Compute a matrix 2048 * 2048 with 4 threads
+Compute Parallel Time 2287.985000 (ms)
+
+Compute a matrix 2048 * 2048 with 6 threads
+Compute Parallel Time 1599.758000 (ms)
+
+Compute a matrix 2048 * 2048 with 8 threads
+Compute Parallel Time 1307.055000 (ms)
+
+Compute a matrix 2048 * 2048 with 10 threads
+Compute Parallel Time 1051.883000 (ms)
+
+Compute a matrix 2048 * 2048 with 12 threads
+Compute Parallel Time 888.541000 (ms)
+
+Compute a matrix 2048 * 2048 with 14 threads
+Compute Parallel Time 774.604000 (ms)
+
+Compute a matrix 2048 * 2048 with 16 threads
+Compute Parallel Time 837.030000 (ms)
+
+Compute a matrix 2048 * 2048 with 20 threads
+Compute Parallel Time 790.056000 (ms)
+
+Compute a matrix 2048 * 2048 with 24 threads
+Compute Parallel Time 770.615000 (ms)
+
+Compute a matrix 2048 * 2048 with 28 threads
+Compute Parallel Time 781.042000 (ms)
+
+Compute a matrix 4096 * 4096 with 2 threads
+Compute Parallel Time 73711.206000 (ms)
+
+Compute a matrix 4096 * 4096 with 4 threads
+Compute Parallel Time 36324.969000 (ms)
+
+Compute a matrix 4096 * 4096 with 6 threads
+Compute Parallel Time 24754.933000 (ms)
+
+Compute a matrix 4096 * 4096 with 8 threads
+Compute Parallel Time 30545.153000 (ms)
+
+Compute a matrix 4096 * 4096 with 10 threads
+Compute Parallel Time 19908.326000 (ms)
+
+Compute a matrix 4096 * 4096 with 12 threads
+Compute Parallel Time 15448.015000 (ms)
+
+Compute a matrix 4096 * 4096 with 14 threads
+Compute Parallel Time 13456.078000 (ms)
+
+Compute a matrix 4096 * 4096 with 16 threads
+Compute Parallel Time 11038.827000 (ms)
+
+Compute a matrix 4096 * 4096 with 20 threads
+Compute Parallel Time 10308.113000 (ms)
+
+Compute a matrix 4096 * 4096 with 24 threads
+Compute Parallel Time 9058.640000 (ms)
+
+Compute a matrix 4096 * 4096 with 28 threads
+Compute Parallel Time 8608.825000 (ms)
+
+Compute a matrix 6144 * 6144 with 2 threads
+Compute Parallel Time 237627.078000 (ms)
+
+Compute a matrix 6144 * 6144 with 4 threads
+Compute Parallel Time 116992.998000 (ms)
+
+Compute a matrix 6144 * 6144 with 6 threads
+Compute Parallel Time 80174.129000 (ms)
+
+Compute a matrix 6144 * 6144 with 8 threads
+Compute Parallel Time 104631.684000 (ms)
+
+Compute a matrix 6144 * 6144 with 10 threads
+Compute Parallel Time 61443.830000 (ms)
+
+Compute a matrix 6144 * 6144 with 12 threads
+Compute Parallel Time 50039.873000 (ms)
+
+Compute a matrix 6144 * 6144 with 14 threads
+Compute Parallel Time 44078.224000 (ms)
+
+Compute a matrix 6144 * 6144 with 16 threads
+Compute Parallel Time 37653.130000 (ms)
+
+Compute a matrix 6144 * 6144 with 20 threads
+Compute Parallel Time 34480.629000 (ms)
+
+Compute a matrix 6144 * 6144 with 24 threads
+Compute Parallel Time 30639.479000 (ms)
+
+Compute a matrix 6144 * 6144 with 28 threads
+Compute Parallel Time 29155.069000 (ms)
